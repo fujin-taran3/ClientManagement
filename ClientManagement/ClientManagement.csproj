@@ -73,7 +73,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\DatabaseCreateTable.cs" />
+    <Compile Include="Scripts\CreateTableQuery.cs" />
+    <Compile Include="Scripts\DatabaseAcess.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
