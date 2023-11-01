@@ -36,7 +36,7 @@ namespace ClientManagement.Scripts
 
         public void DatabaseCreateTable(string query)
         {
-            DatabaseConnection()
+            
         }
 
         public void DatabaseInsert(string query)

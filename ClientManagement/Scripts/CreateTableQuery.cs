@@ -11,18 +11,14 @@ namespace ClientManagement.Scripts
     {
         public struct ColumSchema
         {
-            public enum sqlType
-            {
-                Integer,
-                Text,
-                Real,
-                Blob,
-            }
+            public 
 
             public string Name { get; set; }
-            public sqlType Type { get; set; }
+            public TypeAffinity Type { get; set; }
 
-            public ColumSchema(string name, sqlType type)
+            
+
+            public ColumSchema(string name, System.Data.SqlDbType type)
             {
                 Name = name;
                 Type = type;
