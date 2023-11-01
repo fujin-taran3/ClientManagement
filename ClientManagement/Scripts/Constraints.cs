@@ -10,10 +10,16 @@
 
         public static string Default(string num) { return "Check " + num; }
 
-        public static string ForeignKey(string a)
+        public static string ForeignKey(string colum,string table)
         {
-            return default;
+            return $"Foreign Key {colum} References {table}";
         }
-        
+
+        public static string ForeignKey(string colum, string table, string )
+        {
+            return $"Foreign Key {colum} References {table}";
+        }
+
+
     }
 }
