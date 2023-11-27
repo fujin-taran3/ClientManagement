@@ -1,23 +1,49 @@
-﻿namespace System.Data.SQLite
+﻿namespace RakurakuSQLQuery
 {
+    /// <summary>
+    /// コラムのタイプ
+    /// </summary>
+    public enum ColumType
+    {
+        Integer,
+        Text,
+        Real,
+        Blob,
+    }
+
+    /// <summary>
+    /// 制約文を作成するためのクラス
+    /// </summary>
     public static class Constraints
     {
         public const string NotNull = "Not Null";
         public const string Unique = "Unique";
         public const string PrimaryKey = "Primary Key";
-
-        public static string Check(string check) { return "Check " + check; }
-
-        public static string Default(string num) { return "Check " + num; }
-
-        public static string ForeignKey(string colum,string table)
+        public enum ForeignKeyOn
         {
-            return $"Foreign Key {colum} References {table}";
+            DELETE,
+            UPDATE,
+        }
+        public enum ForeignKeyAction
+        {
+            No_Action,
+            Cascade,
+            Set_Null,
+            Set_Default,
+            Restrict
+        }
+        public static string Check(string check) { return $"Check({check})"; }
+
+        public static string Default(string num) { return "Default " + num; }
+
+        public static string ForeignKey(string table)
+        {
+            return  $"References {table}";
         }
 
-        public static string ForeignKey(string colum, string table, string )
+        public static string ForeignKey(string table, ForeignKeyOn on, ForeignKeyAction action)
         {
-            return $"Foreign Key {colum} References {table}";
+            return $"References {table} ON {on} {action.ToString().Replace("_"," ")}";
         }
 
 

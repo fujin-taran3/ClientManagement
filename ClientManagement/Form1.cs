@@ -24,9 +24,13 @@ namespace ClientManagement
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void GoTest_Click(object sender, EventArgs e)
         {
-            
+            TestForm test = new TestForm();
+            test.Show();
+            Hide();
+
+
         }
     }
 }
