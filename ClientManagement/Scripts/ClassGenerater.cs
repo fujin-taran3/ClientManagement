@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
 
-namespace RakurakuSQLQuery
+namespace SQLQueryUser
 {
     public class ClassGenerater
     {       

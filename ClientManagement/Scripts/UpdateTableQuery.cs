@@ -4,54 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RakurakuSQLQuery
+namespace SQLQueryUser
 {
-    /// <summary>
-    /// アップデートする列とアップデート後の値
-    /// </summary>
-    public struct UpdateSetInfo
-    {
-        public string TargetColum { get; }
-        public string UpdateValue { get; }
-        public string ParameterString { get { return "@" + TargetColum; } }
-        public UpdateSetInfo(string targetColum,string setValue)
-        {
-            TargetColum = targetColum;
 
-            UpdateValue = setValue;
-        }
-    }
-
-    /// <summary>
-    /// 不等号を使用する文をパラメータ込みで作る
-    /// </summary>
-    public struct WhereInfo
-    {
-
-    }
-    
     public class UpdateTableQuery
     {
-        public string TableName { get ;}
+        public string TableName { get; }
+
+        readonly private string startString = default;
         public UpdateTableQuery(string tablename)
         {
             TableName = tablename;
+            startString = $"update {tablename} set";
         }
-        
+
 
         public string UpdateTableString(UpdateSetInfo setInfo, string where = "")
         {
-
+            return default;
         }
 
-        public string UpdateTableString(UpdateSetInfo[] setInfos,string where = "")
+        public string UpdateTableString(UpdateSetInfo setInfo,WhereStringInfo whereInfo)
         {
-
+            return default;
         }
-        
-        public string UpdateTableString(UpdateSetInfo[] setInfos,WhereInfo whereInfo)
-        {
 
+        public string UpdateTableString(UpdateSetInfo[] setInfos, string where = "")
+        {
+            return default;
+        }
+
+        public string UpdateTableString(UpdateSetInfo[] setInfos, WhereStringInfo whereInfo)
+        {
+            return default;
+        }
+
+        private string setInfoConnect(UpdateSetInfo[] infos)
+        {
+            string connectedString = default;
+
+            for (int i = 0; i < infos.Length; i++)
+            {
+                UpdateSetInfo info = infos[i];
+                connectedString += $"{info.TargetColum} = {info.ParameterString} ,";
+                
+            }
+
+            if (connectedString.EndsWith(","))
+            {
+                connectedString.Substring(0, connectedString.Length - 1);
+            }
+
+            return connectedString;
         }
     }
 }

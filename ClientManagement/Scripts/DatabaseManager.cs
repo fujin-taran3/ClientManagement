@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 
-namespace RakurakuSQLQuery
+namespace SQLQueryUser
 {
-    public class DatabaseManager
+    public class DatabaseManager:IDatabaseSingleton
     {
         private const string ADD_STRING = "Data Source=";
         private readonly string _connectionString;
+
+        private GetMatchesString matchesString = new GetMatchesString();
 
         public string DatabaseName { get; private set; }
         public DatabaseManager(string databaseName)
@@ -90,7 +92,11 @@ namespace RakurakuSQLQuery
                 }
             });
         }
-
+        
+        /// <summary>
+        /// クエリを実行するだけ
+        /// </summary>
+        /// <param name="query"></param>
         public void CreateTable(string query)
         {
 
@@ -106,10 +112,10 @@ namespace RakurakuSQLQuery
         /// データを追加する
         /// </summary>
         /// <param name="queryStrings">SQL文作成情報</param>
-        /// <param name="parameters">追加する情報の内容</param>
-        public void InsertData(InsertStrings queryStrings,string[] parameters)
+        /// <param name="addParameters">追加する情報の内容</param>
+        public void InsertData(InsertStrings queryStrings,string[] addParameters)
         {
-            if(queryStrings.parameterStrings.Length != parameters.Length)
+            if(queryStrings.parameterStrings.Length != addParameters.Length)
             {
                 Console.WriteLine("ERROR:このテーブルのコラムの数と設定するパラメータの数が合ってません");
                 return;
@@ -118,20 +124,52 @@ namespace RakurakuSQLQuery
             ExecuteCommand(command =>
             {
                 command.CommandText = queryStrings.query;
-                for(int i = 0; i < parameters.Length;i++)
+                for(int i = 0; i < addParameters.Length;i++)
                 {
-                    command.Parameters.AddWithValue(queryStrings.parameterStrings[i], parameters[i]);
+                    command.Parameters.AddWithValue(queryStrings.parameterStrings[i], addParameters[i]);
                 }
 
                 command.ExecuteNonQuery();
             });
         }
-        
-        public void UpdateData()
+
+        /// <summary>
+        /// データを追加する
+        /// </summary>
+        /// <param name="query">クエリ</param>
+        /// <param name="addParameters">追加する情報の内容</param>
+        public void InsertData(string query,string[] addParameters)
         {
+            string[] parameterStrings = matchesString.GetParameterToQuery(query);
+
+            InsertStrings insertStrings = new InsertStrings(query, parameterStrings);
+
+            InsertData(insertStrings, addParameters);
 
         }
+        
+        /// <summary>
+        /// パラメータ付きクエリを実行する
+        /// </summary>
+        /// <param name="query">パラメータ付きクエリ</param>
+        /// <param name="changeParameters">埋め込むパラメータ</param>
+        public void UseParameterQuery(string query,string[] changeParameters)
+        {
+            string[] parameterStrings = matchesString.GetParameterToQuery(query);
 
+            ExecuteCommand(command =>
+            {
+                command.CommandText = query;
+                for (int i = 0; i < changeParameters.Length; i++)
+                {
+                    command.Parameters.AddWithValue(parameterStrings[i], changeParameters[i]);
+                }
+
+                command.ExecuteNonQuery();
+            });
+        }
+
+            
         /// <summary>
         /// 存在しているテーブルを取得する
         /// </summary>

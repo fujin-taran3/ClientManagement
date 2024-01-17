@@ -1,15 +1,5 @@
-﻿namespace RakurakuSQLQuery
+﻿namespace SQLQueryUser
 {
-    /// <summary>
-    /// コラムのタイプ
-    /// </summary>
-    public enum ColumType
-    {
-        Integer,
-        Text,
-        Real,
-        Blob,
-    }
 
     /// <summary>
     /// 制約文を作成するためのクラス

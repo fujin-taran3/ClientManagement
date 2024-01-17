@@ -5,25 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RakurakuSQLQuery
+namespace SQLQueryUser
 {
-    public struct InsertStrings
-    {
-        /// <summary>
-        /// sql文
-        /// </summary>
-        public string query;
-        
-        /// <summary>
-        /// パラメータの文字列 先頭には@
-        /// </summary>
-        public string[] parameterStrings;
-        public InsertStrings(string query,string[] parameterStrings)
-        {
-            this.query = query;
-            this.parameterStrings = parameterStrings;
-        }
-    }
     public class InsertTableQuery
     {
         public string TableName { get; }
@@ -31,7 +14,7 @@ namespace RakurakuSQLQuery
         {
             TableName = tableName;
         }
-        
+
         /// <summary>
         /// インサート文を作成する
         /// </summary>
@@ -40,18 +23,18 @@ namespace RakurakuSQLQuery
         public InsertStrings InsertTableStrings(string[] colums)
         {
             string[] columParams = new string[colums.Length];
-            colums.CopyTo(columParams,0);  
+            colums.CopyTo(columParams, 0);
 
-            for(int i = 0; i < columParams.Length; i++)
+            for (int i = 0; i < columParams.Length; i++)
             {
                 columParams[i] = "@" + columParams[i];
             }
 
-            string insertString = $"insert into {TableName}({string.Join(",",colums)})" +
-                $"values({string.Join(",",columParams)});";
+            string insertString = $"insert into {TableName}({string.Join(",", colums)})" +
+                $"values({string.Join(",", columParams)});";
 
             return new InsertStrings(insertString, columParams);
         }
 
-        }
+    }
 }
