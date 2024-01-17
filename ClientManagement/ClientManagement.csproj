@@ -65,6 +65,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controls\MemberControll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\MemberControll.Designer.cs">
+      <DependentUpon>MemberControll.cs</DependentUpon>
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +121,9 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="controls\MemberControll.resx">
+      <DependentUpon>MemberControll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="controls\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>

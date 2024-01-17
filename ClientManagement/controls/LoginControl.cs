@@ -24,7 +24,7 @@ namespace ClientManagement.controls
             string id = this.TextboxID.Text;
             string pass = this.TextboxPassword.Text;
 
-            formController.ChangeControl(new MainMenuControl());
+            formController.ChangeControl(new MemberControll());
         }
     }
 }
