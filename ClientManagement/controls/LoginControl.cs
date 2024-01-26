@@ -45,15 +45,16 @@ namespace ClientManagement.controls
         /// </summary>
         private void Login()
         {
-            const string COLUM_PASSWORD = "WORKER_PASS";
-            const string COLUM_SALT = "WORKER_SALT";
-            const string PARAMETER_NAME = "@ID";
+            string columPassword = "WORKER_PASS";
+            string columSalt = "WORKER_SALT";
+            string parameterName = "@ID";
 
+            // インスタンス取得
             DatabaseManager database = DatabaseAcessSingle.Instance;
 
             string id = this.TextboxID.Text;
             string password = this.TextboxPassword.Text;
-            string loginQuery = $"SELECT WORKER_ID,{COLUM_PASSWORD},{COLUM_SALT} FROM WORKERS WHERE WORKER_ID = {PARAMETER_NAME}";
+            string loginQuery = $"SELECT WORKER_ID,{columPassword},{columSalt} FROM WORKERS WHERE WORKER_ID = {parameterName}";
             bool successLogin = false;
 
             // 認証
@@ -63,8 +64,8 @@ namespace ClientManagement.controls
                 {
                     PasswordAuthentication authentication = new PasswordAuthentication();
 
-                    string storedPasswordHash = reader[COLUM_PASSWORD].ToString();
-                    byte[] storedSalt = (byte[])reader[COLUM_SALT];
+                    string storedPasswordHash = reader[columPassword].ToString();
+                    byte[] storedSalt = (byte[])reader[columSalt];
 
                     // ハッシュ後のパスワード同士を比較
                     string userPasswordHash = authentication.HashPassword(password, storedSalt);
@@ -72,7 +73,7 @@ namespace ClientManagement.controls
 
                 }
             }, loginQuery
-            , new SQLiteParameter(PARAMETER_NAME, id));
+            , new SQLiteParameter(parameterName, id));
 
             if (successLogin)
             {
@@ -81,8 +82,8 @@ namespace ClientManagement.controls
             }
             else
             {
-                const string MESSAGE_TEXT = "ERROR:IDかパスワードを間違えています";
-                MessageBox.Show(MESSAGE_TEXT);
+                string messageText = "ERROR:IDかパスワードを間違えています";
+                MessageBox.Show(messageText);
 
             }
         }
@@ -92,10 +93,10 @@ namespace ClientManagement.controls
         /// </summary>
         private void ConfirmInitializeDatabase()
         {
-            const string MESSAGE_TEXT = "処理を実行しますか？";
-            const string MESSAGE_CAPTION = "確認";
+            string messageText = "処理を実行しますか？";
+            string messageCaption = "確認";
 
-            DialogResult result = MessageBox.Show(MESSAGE_TEXT, MESSAGE_CAPTION, MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show(messageText, messageCaption, MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
