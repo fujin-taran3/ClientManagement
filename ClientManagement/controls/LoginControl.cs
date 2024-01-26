@@ -53,8 +53,8 @@ namespace ClientManagement.controls
 
             string id = this.TextboxID.Text;
             string password = this.TextboxPassword.Text;
-            bool successLogin = false;
             string loginQuery = $"SELECT WORKER_ID,{COLUM_PASSWORD},{COLUM_SALT} FROM WORKERS WHERE WORKER_ID = {PARAMETER_NAME}";
+            bool successLogin = false;
 
             // 認証
             database.ExecuteReader(reader =>
