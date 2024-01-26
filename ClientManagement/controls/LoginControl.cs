@@ -5,6 +5,9 @@ using SQLQueryUser;
 
 namespace ClientManagement.controls
 {
+    /// <summary>
+    /// ログイン画面用のコントロール
+    /// </summary>
     public partial class LoginControl : UserControl
     {
         readonly UserControlController _formController = default;
