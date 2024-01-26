@@ -45,8 +45,8 @@ namespace ClientManagement.controls
         /// </summary>
         private void Login()
         {
-            const string ROW_PASSWORD = "WORKER_PASS";
-            const string ROW_SALT = "WORKER_SALT";
+            const string COLUM_PASSWORD = "WORKER_PASS";
+            const string COLUM_SALT = "WORKER_SALT";
             const string PARAMETER_NAME = "@ID";
 
             DatabaseManager database = DatabaseAcessSingle.Instance;
@@ -54,7 +54,7 @@ namespace ClientManagement.controls
             string id = this.TextboxID.Text;
             string password = this.TextboxPassword.Text;
             bool successLogin = false;
-            string loginQuery = $"SELECT WORKER_ID,{ROW_PASSWORD},{ROW_SALT} FROM WORKERS WHERE WORKER_ID = {PARAMETER_NAME}";
+            string loginQuery = $"SELECT WORKER_ID,{COLUM_PASSWORD},{COLUM_SALT} FROM WORKERS WHERE WORKER_ID = {PARAMETER_NAME}";
 
             // 認証
             database.ExecuteReader(reader =>
@@ -63,8 +63,8 @@ namespace ClientManagement.controls
                 {
                     PasswordAuthentication authentication = new PasswordAuthentication();
 
-                    string storedPasswordHash = reader[ROW_PASSWORD].ToString();
-                    byte[] storedSalt = (byte[])reader[ROW_SALT];
+                    string storedPasswordHash = reader[COLUM_PASSWORD].ToString();
+                    byte[] storedSalt = (byte[])reader[COLUM_SALT];
 
                     // ハッシュ後のパスワード同士を比較
                     string userPasswordHash = authentication.HashPassword(password, storedSalt);
