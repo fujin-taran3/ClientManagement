@@ -37,6 +37,7 @@ namespace ClientManagement.controls
             this.LabelID = new System.Windows.Forms.Label();
             this.LabelPassword = new System.Windows.Forms.Label();
             this.BottonGoLogin = new System.Windows.Forms.Button();
+            this.ButtonDBInit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextboxID
@@ -56,7 +57,7 @@ namespace ClientManagement.controls
             this.ClientManagement.AutoSize = true;
             this.ClientManagement.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ClientManagement.Location = new System.Drawing.Point(186, 58);
-            this.ClientManagement.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.ClientManagement.Margin = new System.Windows.Forms.Padding(0);
             this.ClientManagement.Name = "ClientManagement";
             this.ClientManagement.Size = new System.Drawing.Size(612, 75);
             this.ClientManagement.TabIndex = 1;
@@ -103,12 +104,23 @@ namespace ClientManagement.controls
             this.BottonGoLogin.TabIndex = 6;
             this.BottonGoLogin.Text = "GO";
             this.BottonGoLogin.UseVisualStyleBackColor = true;
-            this.BottonGoLogin.Click += new System.EventHandler(this.BottonGoLogin_Click);
+            this.BottonGoLogin.Click += new System.EventHandler(this.GoLoginButtonClick);
+            // 
+            // ButtonDBInit
+            // 
+            this.ButtonDBInit.Location = new System.Drawing.Point(722, 596);
+            this.ButtonDBInit.Name = "ButtonDBInit";
+            this.ButtonDBInit.Size = new System.Drawing.Size(133, 40);
+            this.ButtonDBInit.TabIndex = 7;
+            this.ButtonDBInit.Text = "DB初期化";
+            this.ButtonDBInit.UseVisualStyleBackColor = true;
+            this.ButtonDBInit.Click += new System.EventHandler(this.InitializeButtonClick);
             // 
             // LoginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ButtonDBInit);
             this.Controls.Add(this.BottonGoLogin);
             this.Controls.Add(this.LabelPassword);
             this.Controls.Add(this.LabelID);
@@ -131,5 +143,6 @@ namespace ClientManagement.controls
         private System.Windows.Forms.Label LabelID;
         private System.Windows.Forms.Label LabelPassword;
         private System.Windows.Forms.Button BottonGoLogin;
+        private System.Windows.Forms.Button ButtonDBInit;
     }
 }

@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.Collections.Generic;
 
 namespace SQLQueryUser
-{
+{    
     public class ClassGenerater
     {       
         /// <summary>

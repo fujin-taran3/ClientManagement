@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 
 namespace SQLQueryUser
 {
-    public class DatabaseManager:IDatabaseSingleton
+    public class DatabaseManager : IDatabaseSingleton
     {
         private const string ADD_STRING = "Data Source=";
         private readonly string _connectionString;
@@ -15,11 +16,17 @@ namespace SQLQueryUser
         public string DatabaseName { get; private set; }
         public DatabaseManager(string databaseName)
         {
+            // ファイルパスに拡張子がない場合は自動的に ".db" を追加
+            if (!Path.HasExtension(databaseName))
+            {
+                databaseName += ".db";
+            }
             _connectionString = ADD_STRING + databaseName;
 
             DatabaseName = databaseName;
+
         }
-        
+
         /// <summary>
         /// データベースと接続する処理し、中継する
         /// </summary>
@@ -37,7 +44,7 @@ namespace SQLQueryUser
         /// コマンドで使用される接続を取得または設定し、中継する
         /// </summary>
         /// <param name="commandAction">接続設定後の処理</param>
-        public void ExecuteCommand(Action<SQLiteCommand> commandAction,bool useTransaction = false)
+        public void ExecuteCommand(Action<SQLiteCommand> commandAction, bool useTransaction = false)
         {
             ExecuteConnection(connection =>
             {
@@ -71,7 +78,7 @@ namespace SQLQueryUser
                         // トランザクションを使用しない場合は単一のコマンドを実行
                         commandAction(command);
                     }
-                    
+
                 }
             });
         }
@@ -92,7 +99,27 @@ namespace SQLQueryUser
                 }
             });
         }
-        
+
+        /// <summary>
+        /// 実行されたコマンドの結果を読み取るために必要
+        /// </summary>
+        /// <param name="readerAction">読み取った後の処理</param>
+        /// <param name="query">コマンドのクエリ</param>
+        /// <param name="parameters">パラメータ</param>
+        public void ExecuteReader(Action<SQLiteDataReader> readerAction, string query, params SQLiteParameter[] parameters)
+        {
+            ExecuteCommand(command =>
+            {
+                command.CommandText = query;
+                command.Parameters.AddRange(parameters);
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    readerAction(reader);
+                }
+            });
+        }
+
         /// <summary>
         /// クエリを実行するだけ
         /// </summary>
@@ -113,9 +140,9 @@ namespace SQLQueryUser
         /// </summary>
         /// <param name="queryStrings">SQL文作成情報</param>
         /// <param name="addParameters">追加する情報の内容</param>
-        public void InsertData(InsertStrings queryStrings,string[] addParameters)
+        public void InsertData(InsertStrings queryStrings, string[] addParameters)
         {
-            if(queryStrings.parameterStrings.Length != addParameters.Length)
+            if (queryStrings.parameterStrings.Length != addParameters.Length)
             {
                 Console.WriteLine("ERROR:このテーブルのコラムの数と設定するパラメータの数が合ってません");
                 return;
@@ -124,7 +151,7 @@ namespace SQLQueryUser
             ExecuteCommand(command =>
             {
                 command.CommandText = queryStrings.query;
-                for(int i = 0; i < addParameters.Length;i++)
+                for (int i = 0; i < addParameters.Length; i++)
                 {
                     command.Parameters.AddWithValue(queryStrings.parameterStrings[i], addParameters[i]);
                 }
@@ -138,7 +165,7 @@ namespace SQLQueryUser
         /// </summary>
         /// <param name="query">クエリ</param>
         /// <param name="addParameters">追加する情報の内容</param>
-        public void InsertData(string query,string[] addParameters)
+        public void InsertData(string query, string[] addParameters)
         {
             string[] parameterStrings = matchesString.GetParameterToQuery(query);
 
@@ -147,13 +174,13 @@ namespace SQLQueryUser
             InsertData(insertStrings, addParameters);
 
         }
-        
+
         /// <summary>
         /// パラメータ付きクエリを実行する
         /// </summary>
         /// <param name="query">パラメータ付きクエリ</param>
         /// <param name="changeParameters">埋め込むパラメータ</param>
-        public void UseParameterQuery(string query,string[] changeParameters)
+        public void UseParameterQuery(string query, string[] changeParameters)
         {
             string[] parameterStrings = matchesString.GetParameterToQuery(query);
 
@@ -169,7 +196,7 @@ namespace SQLQueryUser
             });
         }
 
-            
+
         /// <summary>
         /// 存在しているテーブルを取得する
         /// </summary>
@@ -185,7 +212,7 @@ namespace SQLQueryUser
 
             return tables;
         }
-        
+
         /// <summary>
         /// テーブルの表定義を取得する
         /// </summary>
@@ -224,7 +251,8 @@ namespace SQLQueryUser
             return columsNames.ToArray();
         }
 
-        }
+
+    }
 
 
 }

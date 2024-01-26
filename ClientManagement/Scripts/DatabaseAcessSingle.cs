@@ -3,16 +3,16 @@ namespace ClientManagement
 {
     public class DatabaseAcessSingle
     {
-        private static SQLQueryUser.IDatabaseSingleton _instance;
+        private static SQLQueryUser.DatabaseManager _instance;
         private static readonly ReaderWriterLockSlim lockSlim = new ReaderWriterLockSlim();
-
+        
         public DatabaseAcessSingle() { }
-        public DatabaseAcessSingle(SQLQueryUser.IDatabaseSingleton database)
+        public DatabaseAcessSingle(SQLQueryUser.DatabaseManager database)
         {
             Instance = database;
         }
 
-        public static SQLQueryUser.IDatabaseSingleton Instance
+        public static SQLQueryUser.DatabaseManager Instance
         {
             get
             {

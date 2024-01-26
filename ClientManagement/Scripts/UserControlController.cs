@@ -8,11 +8,11 @@ using ClientManagement.controls;
 
 namespace ClientManagement
 {
-    public class ControlForm
+    public class UserControlController
     {
-        private Control.ControlCollection usingForm = default;
+        readonly Control.ControlCollection usingForm = default;
 
-        public ControlForm(Control.ControlCollection form)
+        public UserControlController(Control.ControlCollection form)
         {            
             usingForm = form;
         }
@@ -20,6 +20,14 @@ namespace ClientManagement
         public void ChangeControl (UserControl control){
             usingForm.Clear();
             usingForm.Add(control);
+        }
+        
+        public void ReSize(System.Drawing.Size size)
+        {
+            foreach(Control control in usingForm)
+            {
+                control.Size = size;
+            }
         }
     }
 }
