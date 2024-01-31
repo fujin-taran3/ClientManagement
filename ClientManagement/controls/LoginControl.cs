@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Data.SQLite;
 using SQLQueryUser;
+using ClientManagement.Scripts;
 
 namespace ClientManagement.controls
 {
@@ -10,10 +11,10 @@ namespace ClientManagement.controls
     /// </summary>
     public partial class LoginControl : UserControl
     {
-        readonly UserControlController _formController = default;
+        readonly UserControlControler _formController = default;
         readonly IInitilizeDatabase _init = default;
 
-        public LoginControl(UserControlController control, IInitilizeDatabase init)
+        public LoginControl(UserControlControler control, IInitilizeDatabase init)
         {
             InitializeComponent();
 
@@ -47,6 +48,8 @@ namespace ClientManagement.controls
         {
             string columPassword = "WORKER_PASS";
             string columSalt = "WORKER_SALT";
+            string columName = "WORKER_NAME";
+            string columGroup = "WORKER_GROUP_ID";
             string parameterName = "@ID";
 
             // インスタンス取得
@@ -54,7 +57,9 @@ namespace ClientManagement.controls
 
             string id = this.TextboxID.Text;
             string password = this.TextboxPassword.Text;
-            string loginQuery = $"SELECT WORKER_ID,{columPassword},{columSalt} FROM WORKERS WHERE WORKER_ID = {parameterName}";
+            string loginQuery = $"SELECT {columPassword},{columSalt},{columName},{columGroup} FROM WORKERS WHERE WORKER_ID = {parameterName}";
+            string name = default;
+            int group = default;
             bool successLogin = false;
 
             // 認証
@@ -71,13 +76,19 @@ namespace ClientManagement.controls
                     string userPasswordHash = authentication.HashPassword(password, storedSalt);
                     successLogin = storedPasswordHash == userPasswordHash;
 
+                    name = reader[columName].ToString();
+                    group = reader.GetInt32(reader.GetOrdinal(columGroup));
                 }
             }, loginQuery
             , new SQLiteParameter(parameterName, id));
 
             if (successLogin)
             {
-                _formController.ChangeControl(new MainMenuControl());
+                UserDataManager.Instance.Name = name;
+                UserDataManager.Instance.ID = int.Parse(id);
+                UserDataManager.Instance.GroupID = group;
+
+                _formController.ChangeControl(new MainMenuControl(_formController));
 
             }
             else
@@ -100,8 +111,17 @@ namespace ClientManagement.controls
 
             if (result == DialogResult.Yes)
             {
+                Cursor.Current = Cursors.WaitCursor;
                 _init.InitializeDatabase();
-            }
+                Cursor.Current = Cursors.Default;
+            };
+        }
+        private void ClientManagementClick(object sender, EventArgs e)
+        {
+            this.TextboxID.Text = "1000001";
+            this.TextboxPassword.Text = "password";
         }
     }
+
+
 }

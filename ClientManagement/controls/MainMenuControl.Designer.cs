@@ -29,33 +29,47 @@ namespace ClientManagement.controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.LabelMainMenuTitle = new System.Windows.Forms.Label();
+            this.ButtonClient = new System.Windows.Forms.Button();
+            this.ButtonWorker = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LabelMainMenuTitle
+            // ButtonClient
             // 
-            this.LabelMainMenuTitle.AutoSize = true;
-            this.LabelMainMenuTitle.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LabelMainMenuTitle.Location = new System.Drawing.Point(319, 0);
-            this.LabelMainMenuTitle.Name = "LabelMainMenuTitle";
-            this.LabelMainMenuTitle.Size = new System.Drawing.Size(293, 53);
-            this.LabelMainMenuTitle.TabIndex = 0;
-            this.LabelMainMenuTitle.Text = "メインメニュー";
+            this.ButtonClient.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ButtonClient.Location = new System.Drawing.Point(95, 183);
+            this.ButtonClient.Name = "ButtonClient";
+            this.ButtonClient.Size = new System.Drawing.Size(270, 322);
+            this.ButtonClient.TabIndex = 0;
+            this.ButtonClient.Text = "顧客管理";
+            this.ButtonClient.UseVisualStyleBackColor = true;
+            this.ButtonClient.Click += new System.EventHandler(this.ButtonClientClick);
+            // 
+            // ButtonWorker
+            // 
+            this.ButtonWorker.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ButtonWorker.Location = new System.Drawing.Point(631, 183);
+            this.ButtonWorker.Name = "ButtonWorker";
+            this.ButtonWorker.Size = new System.Drawing.Size(270, 322);
+            this.ButtonWorker.TabIndex = 1;
+            this.ButtonWorker.Text = "従業員管理";
+            this.ButtonWorker.UseVisualStyleBackColor = true;
+            this.ButtonWorker.Click += new System.EventHandler(this.ButtonWorkerClick);
             // 
             // MainMenuControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LabelMainMenuTitle);
+            this.Controls.Add(this.ButtonWorker);
+            this.Controls.Add(this.ButtonClient);
             this.Name = "MainMenuControl";
             this.Size = new System.Drawing.Size(1000, 700);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label LabelMainMenuTitle;
+        private System.Windows.Forms.Button ButtonClient;
+        private System.Windows.Forms.Button ButtonWorker;
     }
 }

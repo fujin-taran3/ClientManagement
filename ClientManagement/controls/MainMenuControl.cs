@@ -12,9 +12,21 @@ namespace ClientManagement.controls
 {
     public partial class MainMenuControl : UserControl
     {
-        public MainMenuControl()
+        UserControlControler _controller = default;    
+        public MainMenuControl(UserControlControler controller)
         {
             InitializeComponent();
+            _controller = controller;
+        }
+
+        private void ButtonClientClick(object sender, EventArgs e)
+        {
+            _controller.ChangeControl(new ClientsControl(_controller));
+        }
+
+        private void ButtonWorkerClick(object sender, EventArgs e)
+        {
+            _controller.ChangeControl(new WorkersControl(_controller));
         }
     }
 }

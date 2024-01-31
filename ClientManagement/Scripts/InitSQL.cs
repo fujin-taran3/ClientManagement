@@ -12,10 +12,11 @@ namespace ClientManagement.Scripts
         string _passwordHash = default;
         byte[] _salt = default;
         string _workerInsert = default;
-        string _sql = default;  
+        string _sql = default;
 
         public InitSQL()
-        {           _sql = $@"
+        {
+            _sql = $@"
 DROP TABLE IF EXISTS CLIENT_SERVICE_LOG;
 DROP TABLE IF EXISTS CHANGE_VALUE;
 DROP TABLE IF EXISTS CHANGE_STATUS;
@@ -94,8 +95,7 @@ CREATE TABLE CLIENTS
     CLIENT_REGISTERED_DATE TEXT NOT NULL,
     CLIENT_GENDER TEXT,
     CLIENT_DELETE_DATE TEXT,
-    CHECK (CLIENT_GENDER IN (""男"",""女"",""その他"") ),
-    CHECK (CLIENT_DELETE_DATE >= DATE(""NOW""))
+    CHECK (CLIENT_GENDER IN (""男"",""女"",""その他"") )
 );
 
 CREATE TABLE CLIENT_CHANGE_LOG
@@ -135,9 +135,10 @@ CREATE TABLE CLIENT_SERVICE_LOG
     FOREIGN KEY (CLIENT_SERVICE_CLIENT_ID) REFERENCES CLIENTS(CLIENT_ID)
 );";
 
+
         }
     }
 
 }
 
-        
+

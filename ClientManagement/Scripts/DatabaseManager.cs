@@ -251,7 +251,34 @@ namespace SQLQueryUser
             return columsNames.ToArray();
         }
 
-
+        public DataTable GetDataTable(string query)
+        {
+            DataTable dataTable = new DataTable();
+            ExecuteCommand(command =>
+            {
+                command.CommandText = query;
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
+                {
+                    adapter.Fill(dataTable);
+                }
+            });
+            return dataTable;
+        }
+        
+        public DataTable GetDataTable(string query,params SQLiteParameter[] parameters)
+        {
+            DataTable dataTable = new DataTable();
+            ExecuteCommand(command =>
+            {
+                command.CommandText = query;
+                command.Parameters.AddRange(parameters);
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
+                {
+                    adapter.Fill(dataTable);
+                }
+            });
+            return dataTable;
+        }
     }
 
 

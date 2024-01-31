@@ -30,32 +30,46 @@ namespace ClientManagement
         private void InitializeComponent()
         {
             this.PanelControl = new System.Windows.Forms.Panel();
-            this.LabelPath = new System.Windows.Forms.Label();
+            this.LavelLoginName = new System.Windows.Forms.Label();
+            this.ButtonBackControl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PanelControl
             // 
-            this.PanelControl.Location = new System.Drawing.Point(-14, 46);
+            this.PanelControl.AutoScroll = true;
+            this.PanelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.PanelControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelControl.Location = new System.Drawing.Point(0, 46);
             this.PanelControl.Name = "PanelControl";
-            this.PanelControl.Size = new System.Drawing.Size(1095, 655);
+            this.PanelControl.Size = new System.Drawing.Size(1098, 791);
             this.PanelControl.TabIndex = 0;
             // 
-            // LabelPath
+            // LavelLoginName
             // 
-            this.LabelPath.AutoSize = true;
-            this.LabelPath.Location = new System.Drawing.Point(13, 16);
-            this.LabelPath.Name = "LabelPath";
-            this.LabelPath.Size = new System.Drawing.Size(56, 24);
-            this.LabelPath.TabIndex = 1;
-            this.LabelPath.Text = "Path";
+            this.LavelLoginName.AutoSize = true;
+            this.LavelLoginName.Location = new System.Drawing.Point(878, 16);
+            this.LavelLoginName.Name = "LavelLoginName";
+            this.LavelLoginName.Size = new System.Drawing.Size(0, 24);
+            this.LavelLoginName.TabIndex = 2;
+            // 
+            // ButtonBackControl
+            // 
+            this.ButtonBackControl.Location = new System.Drawing.Point(12, 0);
+            this.ButtonBackControl.Name = "ButtonBackControl";
+            this.ButtonBackControl.Size = new System.Drawing.Size(99, 40);
+            this.ButtonBackControl.TabIndex = 3;
+            this.ButtonBackControl.Text = "戻る";
+            this.ButtonBackControl.UseVisualStyleBackColor = true;
+            this.ButtonBackControl.Click += new System.EventHandler(this.ButtonBackControlClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1059, 678);
-            this.Controls.Add(this.LabelPath);
+            this.ClientSize = new System.Drawing.Size(1091, 823);
+            this.Controls.Add(this.ButtonBackControl);
+            this.Controls.Add(this.LavelLoginName);
             this.Controls.Add(this.PanelControl);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainForm";
@@ -69,7 +83,8 @@ namespace ClientManagement
         #endregion
 
         private System.Windows.Forms.Panel PanelControl;
-        private System.Windows.Forms.Label LabelPath;
+        private System.Windows.Forms.Label LavelLoginName;
+        private System.Windows.Forms.Button ButtonBackControl;
     }
 }
 

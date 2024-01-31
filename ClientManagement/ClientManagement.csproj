@@ -65,14 +65,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scripts\ClientManagementDatabaseInit.cs" />
-    <Compile Include="Scripts\IGetLongSQL.cs" />
-    <Compile Include="Scripts\InitializationDatabase.cs" />
-    <Compile Include="controls\MemberControll.cs">
+    <Compile Include="controls\AddClientControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="controls\MemberControll.Designer.cs">
-      <DependentUpon>MemberControll.cs</DependentUpon>
+    <Compile Include="controls\AddClientControl.Designer.cs">
+      <DependentUpon>AddClientControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ChangeClientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ChangeClientControl.Designer.cs">
+      <DependentUpon>ChangeClientControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ClientLogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ClientLogControl.Designer.cs">
+      <DependentUpon>ClientLogControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\WorkersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\WorkersControl.Designer.cs">
+      <DependentUpon>WorkersControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scripts\ClientManagementDatabaseInit.cs" />
+    <Compile Include="Scripts\DataGridPageManager.cs" />
+    <Compile Include="Scripts\GetDataGridInData.cs" />
+    <Compile Include="Scripts\IGetLongSQL.cs" />
+    <Compile Include="Scripts\InitializationDatabase.cs" />
+    <Compile Include="controls\ClientsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ClientsControl.Designer.cs">
+      <DependentUpon>ClientsControl.cs</DependentUpon>
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataSet1.Designer.cs">
@@ -104,7 +130,7 @@
     <Compile Include="Scripts\ColumSchema.cs" />
     <Compile Include="Scripts\ColumType.cs" />
     <Compile Include="Scripts\InitSQL.cs" />
-    <Compile Include="Scripts\UserControlController.cs" />
+    <Compile Include="Scripts\UserControlControler.cs" />
     <Compile Include="Scripts\DatabaseAcessSingle.cs" />
     <Compile Include="Scripts\GetMatchesString.cs" />
     <Compile Include="Scripts\InsertStrings.cs" />
@@ -117,6 +143,7 @@
     <Compile Include="Scripts\Constraints.cs" />
     <Compile Include="Scripts\CreateTableQuery.cs" />
     <Compile Include="Scripts\ClassGenerater.cs" />
+    <Compile Include="Scripts\UserDataManager.cs" />
     <Compile Include="Scripts\UseWhereInfo.cs" />
     <Compile Include="Scripts\WhereStringInfo.cs" />
     <Compile Include="TestForm.cs">
@@ -125,8 +152,17 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="controls\MemberControll.resx">
-      <DependentUpon>MemberControll.cs</DependentUpon>
+    <EmbeddedResource Include="controls\AddClientControl.resx">
+      <DependentUpon>AddClientControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ChangeClientControl.resx">
+      <DependentUpon>ChangeClientControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ClientLogControl.resx">
+      <DependentUpon>ClientLogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ClientsControl.resx">
+      <DependentUpon>ClientsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
@@ -136,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\WorkersControl.resx">
+      <DependentUpon>WorkersControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

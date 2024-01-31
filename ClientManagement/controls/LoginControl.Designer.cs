@@ -38,6 +38,8 @@ namespace ClientManagement.controls
             this.LabelPassword = new System.Windows.Forms.Label();
             this.BottonGoLogin = new System.Windows.Forms.Button();
             this.ButtonDBInit = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TextboxID
@@ -62,14 +64,17 @@ namespace ClientManagement.controls
             this.ClientManagement.Size = new System.Drawing.Size(612, 75);
             this.ClientManagement.TabIndex = 1;
             this.ClientManagement.Text = "なんか管理するやつ";
+            this.ClientManagement.Click += new System.EventHandler(this.ClientManagementClick);
             // 
             // TextboxPassword
             // 
             this.TextboxPassword.Location = new System.Drawing.Point(199, 334);
             this.TextboxPassword.Multiline = true;
             this.TextboxPassword.Name = "TextboxPassword";
+            this.TextboxPassword.PasswordChar = '*';
             this.TextboxPassword.Size = new System.Drawing.Size(656, 38);
             this.TextboxPassword.TabIndex = 2;
+            this.TextboxPassword.UseSystemPasswordChar = true;
             // 
             // contextMenuStrip1
             // 
@@ -110,16 +115,28 @@ namespace ClientManagement.controls
             // 
             this.ButtonDBInit.Location = new System.Drawing.Point(722, 596);
             this.ButtonDBInit.Name = "ButtonDBInit";
-            this.ButtonDBInit.Size = new System.Drawing.Size(133, 40);
+            this.ButtonDBInit.Size = new System.Drawing.Size(167, 40);
             this.ButtonDBInit.TabIndex = 7;
             this.ButtonDBInit.Text = "DB初期化";
             this.ButtonDBInit.UseVisualStyleBackColor = true;
             this.ButtonDBInit.Click += new System.EventHandler(this.InitializeButtonClick);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ClientManagement.Properties.Resources.bug_gokiburi;
+            this.pictureBox1.Location = new System.Drawing.Point(229, 216);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 349);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            // 
             // LoginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ButtonDBInit);
             this.Controls.Add(this.BottonGoLogin);
             this.Controls.Add(this.LabelPassword);
@@ -129,6 +146,7 @@ namespace ClientManagement.controls
             this.Controls.Add(this.TextboxID);
             this.Name = "LoginControl";
             this.Size = new System.Drawing.Size(1000, 700);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +162,6 @@ namespace ClientManagement.controls
         private System.Windows.Forms.Label LabelPassword;
         private System.Windows.Forms.Button BottonGoLogin;
         private System.Windows.Forms.Button ButtonDBInit;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
